@@ -1,0 +1,15 @@
+<nav-bar></nav-bar>
+<div class="d-flex flex-wrap justify-content-evenly">
+    <div class="card m-2 d-flex btn " style="width: 18rem;" *ngFor="let product of products" routerLink="/product/{{product.id}}">
+        <!-- <img src="{{product.thumbnail}}" class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+            <div class="d-flex flex-wrap justify-content-between">
+                <a routerLink="/product/{{product.id}}" class="btn btn-primary">Ver Detalle</a>
+                <h4>${{product.price_currency}}</h4>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
