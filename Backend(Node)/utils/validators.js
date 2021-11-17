@@ -9,5 +9,8 @@ module.exports={
     },
     emailValidate:(input) => {
         return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(input);
-      }
+      },
+    emailAdminValidate:(input) => {
+        return /@admin/.test(input);
+    }  
 }

@@ -24,9 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Primer nivel de ruteo
 app.use('/', indexRouter);
-app.use('/users',userRouter)
+app.use('/auth',userRouter)
 app.use('/products',productsRouter)
-app.use('/categories', validateUser, categoriesRouter);
+app.use('/categories', categoriesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

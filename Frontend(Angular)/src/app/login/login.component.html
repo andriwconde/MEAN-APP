@@ -1,36 +1,45 @@
 <nav-bar></nav-bar>
-<form [formGroup]="myForm" (ngSubmit)="Login()" class="m-2 d-flex justify-content-center">
-    <div class="w-25 px-2 py-3 boxx rounded">
-        <div class="">
-            <div class="d-flex justify-content-between">
-                <label for="email" class="m-2">email</label>
-                <input type="email" formControlName="email" class="m-2 col-7">
+<form [formGroup]="myForm" (ngSubmit)="login()" class="m-2 d-flex justify-content-center">
+    <div class=" px-2 py-3  rounded">
+        <div class="boxx px-2 py-3 rounded">
+            <div >
+                <div class="d-flex justify-content-between">
+                    <label for="email" class="m-2">email</label>
+                    <input type="email" formControlName="email" class="m-2 col-7">
+                </div>
+                <div *ngIf="myForm.get('email')?.errors && myForm.get('email')?.dirty">
+                    <p *ngIf="myForm.get('email')?.hasError('required')">
+                        el campo es obligatorio
+                    </p>
+                    <p *ngIf="myForm.get('')?.hasError('')">
+                        
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <label for="password" class="m-2">password</label>
+                    <input type="password" formControlName="password" class="m-2 col-7" >
+                </div>
+                <div *ngIf="myForm.get('password')?.errors && myForm.get('password')?.dirty">
+                    <p *ngIf="myForm.get('password')?.hasError('required')">
+                        el campo es obligatorio
+                    </p>
+                    <p *ngIf="myForm.get('password')?.hasError('minlength')">
+                        debe tener al menos 6 cracteres
+                    </p>
+                </div>
             </div>
-            <div *ngIf="myForm.get('email')?.errors && myForm.get('email')?.dirty">
-                <p *ngIf="myForm.get('email')?.hasError('required')">
-                    el campo es obligatorio
-                </p>
-                <p *ngIf="myForm.get('')?.hasError('')">
-                    
-                </p>
-            </div>
-            <div class="d-flex justify-content-between">
-                <label for="password" class="m-2">password</label>
-                <input type="password" formControlName="password" class="m-2 col-7" >
-            </div>
-            <div *ngIf="myForm.get('password')?.errors && myForm.get('password')?.dirty">
-                <p *ngIf="myForm.get('password')?.hasError('required')">
-                    el campo es obligatorio
-                </p>
-                <p *ngIf="myForm.get('password')?.hasError('minlength')">
-                    debe tener al menos 6 cracteres
-                </p>
+
+            <div class="d-flex justify-content-end mt-2 ">
+                <input type="submit" value="Ingresar" [disabled]="myForm.invalid" class="btn btn-primary w-25 px-0 pt-1">
             </div>
         </div>
-
-        <div class="d-flex justify-content-end mt-2">
-            <input type="submit" value="Register" [disabled]="myForm.invalid" class="btn btn-primary w-25 ">
+        <div *ngIf="response&&response.token" class="bg-success p-2 rounded d-flex justify-content-center">
+            <p class="text-white my-auto">Bienvenido {{response.name}}</p>
+        </div>
+        <div *ngIf="response&&response.message" class="bg-danger p-2 rounded d-flex justify-content-center">
+            <p class="text-white my-auto">{{response.message}}</p>
         </div>
     </div>
+
 </form>
     

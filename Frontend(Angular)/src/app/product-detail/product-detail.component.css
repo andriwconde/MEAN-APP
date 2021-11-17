@@ -12,3 +12,6 @@ img{
 .card{
     flex-direction: unset;
 }
+.title{
+    padding-left: 0%;
+}

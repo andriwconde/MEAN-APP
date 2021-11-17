@@ -5,6 +5,6 @@ module.exports={
     },
     USERS:{
         emailValidate:"El {PATH} debe ser valido",
-        passwordValidate:"El {PATH} debe contener almenos 1 letra, 1 minuscula, 1 mayuscula"
+        passwordValidate:"El {PATH} debe contener almenos 1 minuscula, 1 mayuscula"
     }
 }

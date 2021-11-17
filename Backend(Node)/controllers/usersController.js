@@ -12,7 +12,8 @@ module.exports={
           })
           const document = await user.save()   
           res.json(document)
-        }catch(e){  
+        }catch(e){
+          res.json(e)  
           next(e)
         }
     },
@@ -34,7 +35,7 @@ module.exports={
         }
         if(bcrypt.compareSync(req.body.password,user.password)){
           const token = jwt.sign({userId:user._id},req.app.get("secretKey")/*, {expiresIn:"1h"} */)
-          res.json({token:token})
+          res.json({token:token,name:user.name})
         }else{
           res.json({message:"Contraseña incorrecta"})
           return
@@ -43,6 +44,14 @@ module.exports={
         next(e)
       }
       
+  },
+  getById:async function(req, res, next){
+    try{
+      const user = await usersModel.findById(req.params.id)
+      res.json(user)
+    }catch(e){
+      next(e)
+    }
   },
     
 }

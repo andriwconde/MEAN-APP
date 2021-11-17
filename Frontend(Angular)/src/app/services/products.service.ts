@@ -10,12 +10,15 @@ export class ProductsService {
     private http:HttpClient
   ) { }
     getAllProducts(){
-      return this.http.get("http://localhost:3000/products").toPromise()
+      return this.http.get("http://localhost:3010/products").toPromise()
     }
-    
+     getAllProductsByCategory(query:string){
+        return this.http.get("http://localhost:3010/products/productsByCategories/" + query).toPromise()
+    }
     getById(id:string){
-      return this.http.get("https://api.mercadolibre.com/items/"+id).toPromise()
+      return this.http.get("http://localhost:3010/products/"+id).toPromise()
     }
-
-    
+    getAllCategories(){
+      return this.http.get("http://localhost:3010/categories").toPromise()
+    }
 }

@@ -10,24 +10,16 @@ module.exports={
         next(e)
       }
     },
-    getAllPaginate:async function(req, res, next){
+    getAllProductsByCategory:async function(req, res, next){
       try{
-        let queryFind = {}
-        if(req.query.buscar){
-          queryFind={
-            name:{$regex:".*"+ req.query.buscar + ".*",$options:"i"}
-          }
-        }
-        const products = await productsModel.paginate(queryFind,{
-          populate:"category",
-          limit:req.query.limit || 2,
-          page:req.query.page || 1
-        })
-        res.json(products)
+        const products = await productsModel.find()
+        const productsByCategory = products.filter(product => product.category == req.params.categoryId)
+        res.json(productsByCategory)
       }catch(e){
         next(e)
       }
     },
+
     getById:async function(req, res, next){
       try{
         const product = await productsModel.findById(req.params.id)
@@ -36,14 +28,22 @@ module.exports={
         next(e)
       }
     },
+    getByCategory:async function(req, res, next){
+      try{
+        const products = await productsModel.findById(req.params.category._id)
+        res.json(products)
+      }catch(e){
+        next(e)
+      }
+    },
     create:async function(req, res, next){
        try{
          const product = new productsModel({
+           code:req.body.code,
            name:req.body.name,
-           sku:req.body.sku,
            description:req.body.description,
            price:req.body.price,
-           quantity:req.body.quantity,
+           picture:req.body.picture,
            category:req.body.categoryId,
           })
           const documento = await product.save()
@@ -54,6 +54,7 @@ module.exports={
       },
     update:async function(req, res, next){
       try{
+        //pasar la categoria en el front como category para actualizar el elemento
         const product = await productsModel.updateOne({_id:req.params.id},req.body)
         res.json(product)
       }catch(e){

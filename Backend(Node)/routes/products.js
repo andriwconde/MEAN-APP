@@ -4,7 +4,7 @@ var router = express.Router();
 const productsController = require("../controllers/productsController")
 /* GET users listing. */
 router.get('/', productsController.getAll)
-router.get('/paginate', productsController.getAllPaginate)
+router.get('/productsByCategories/:categoryId', productsController.getAllProductsByCategory)
 router.get('/:id', productsController.getById)
 router.post('/', productsController.create)
 router.put('/:id', productsController.update )

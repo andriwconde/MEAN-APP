@@ -8,7 +8,7 @@ module.exports={
       }catch(e){
         console.log(e)
       }
-      next(e)
+      next()
     },
     create:async function(req, res, next){
        try{
