@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Category } from 'src/app/interface/category.interface';
+import { Product } from 'src/app/interface/product.interface';
 
 @Component({
   selector: 'nav-bar',
@@ -9,7 +10,7 @@ import { Category } from 'src/app/interface/category.interface';
 })
 export class NavBarComponent implements OnInit {
 
-  @Output() categoryFilter = new EventEmitter<Category>();
+  @Output() categoryFilter = new EventEmitter<Category>(); 
   categories:any
   constructor(
     private productsService:ProductsService) {
@@ -19,7 +20,6 @@ export class NavBarComponent implements OnInit {
 
   async getCategories(){
     const response:any = await this.productsService.getAllCategories()
-    console.log(response)
     this.categories = response
   }
 /* 
@@ -35,10 +35,13 @@ export class NavBarComponent implements OnInit {
     this.products = products
     console.log(products)
    } */
-   onClick(categoria: Category): void{
+    onClick(categoria: Category): void{
     this.categoryFilter.emit(categoria)
   }
-
+/*
+  onHomeClick(): void{
+    this.homeClick.emit()
+  } */
 
   ngOnInit(): void {
   }

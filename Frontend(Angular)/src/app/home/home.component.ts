@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../interface/category.interface';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../interface/product.interface';
 import { ProductsService } from '../services/products.service';
 
@@ -11,24 +11,29 @@ import { ProductsService } from '../services/products.service';
 })
 export class HomeComponent implements OnInit {
     
-  products:any
+  products:Product []=[]
 
   constructor( 
     private productsService:ProductsService,
+    private activatedRoute:ActivatedRoute,
 
     ) { 
-      this.getProducts()
+      const categoryId = this.activatedRoute.snapshot.paramMap.get("categoryId")
+      if(categoryId){
+        this.products = []
+        this.getProductsByCategory(categoryId)
+      }else{
+        this.getProducts()
+      }
   }
-   async getProductsByCategory(category:Category){
+   async getProductsByCategory(category:any){
+    this.products = []
     const products:any = await this.productsService.getAllProducts()
-    
     this.products = products.filter((product:any) => product.category._id == category)
-
    }
 
   async getProducts(){
     const response:any = await this.productsService.getAllProducts()
-    console.log(response)
     this.products = response
    }
   

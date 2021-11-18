@@ -1,6 +1,6 @@
 
 <div>
-    <nav-bar (categoryFilter)="getProductsByCategory($event)" ></nav-bar>
+    <nav-bar (categoryFilter)="getProductsByCategory($event)"></nav-bar>
     <div class="d-flex flex-wrap justify-content-evenly">
             <div class="card m-2 d-flex btn " style="width: 18rem;" *ngFor="let product of products" routerLink="/product/{{product._id}}">
                 <img src="{{product.picture}}" class="card-img-top" alt="...">

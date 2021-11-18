@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { Router, RoutesRecognized } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
      res=> this.response = res,
      err=> this.response = err
      )
+     if(this.response.token){
+     }
   }
   
   ngOnInit(): void {
